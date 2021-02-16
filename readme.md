@@ -14,5 +14,6 @@ On the first start the app generates a database with the user:password combinati
 * admin:1337
 * user1:6969
 * user2:1234
+
 If you break the database for example by SQL injection, just deleting the `database.db` file and restarting the app resets the database.
 Some example messages that exploit vulnerabilities are provided in the file `exploits.txt`.
