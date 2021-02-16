@@ -4,7 +4,7 @@ This is a simple web application implementing a very rudementary social network.
 This App was developed for the Cyber Security Base 2021 online course at the University of Helsinki.
 
 ## How to install and run
-1. You need to have the newest LTS versions of nodejs and npm installed.
+1. You need to have the newest LTS versions of nodejs, npm, and python3 installed.
 2. In the project root directory execute `npm run install_build`.
 3. In the project root directory run `npm start`.
 4. You now should be able to open the app on http://localhost:3000
