@@ -1,0 +1,21 @@
+{
+  "name": "project-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install_build": "npm install; npm run clean; cd frontend; npm install; npm run build; cd ..; mv frontend/build .",
+    "build": "npm run clean; cd frontend; npm run build; cd ..; mv frontend/build .",
+    "start": "node index.js",
+    "clean": "rm -r build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jonas Vaquet",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "sqlite-async": "^1.1.1"
+  }
+}
