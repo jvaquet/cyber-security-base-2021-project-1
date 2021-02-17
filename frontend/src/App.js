@@ -6,7 +6,7 @@ import Like from './components/Like'
 import Message from './components/Message'
 import Password from './components/Password'
 
-export const baseUrl = '/api/'
+export const baseUrl = 'http://localhost:3001/api/'
 
 const App = () => {
   const [token, setToken] = useState('')
@@ -49,10 +49,11 @@ const App = () => {
 
   const toMessageWithMarkup = (msg, idx) => {
     return <div key={idx}> <span dangerouslySetInnerHTML={{__html: msg.msg}}></span> by {msg.from_user}</div>
-    /* 
-    This method includes HTML markup such as <b>bold text</b>, however it also opens the door for XXS.
-    The fixed solution:
-       
+    /*
+    FIX FOR FLAW 2:
+    // This takes away the possibility to add html tags
+    // If parts of that functionality are reqired it must be implemented seperately
+    // Relying on user ability to write html isn't a good idea anyway
     return <div key={idx}> {msg.msg} by {msg.from_user}</div>
     */
   }

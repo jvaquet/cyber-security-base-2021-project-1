@@ -8,12 +8,17 @@ const Password = ({ token }) => {
   const [passwordValid, setPasswordValid] = useState(false)
 
   useEffect(() => {
-    setPasswordValid(/^\d{4}$/.test(password))
+    setPasswordValid(/^\d{16,}$/.test(password))
+    /*
+    FIX FOR FLAW 5:
+    setPasswordValid(/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{18,}$/.test('Aaasfa1'))
+    // Accordingly edit the text below of course (We need upper/lowecase letters and numbers and at least 18 characters => lenght is key)
+    */
   }, [password])
 
   const handleSubimt = (e) => {
     e.preventDefault()
-    if(!password)
+    if(!password || !passwordValid)
       return
     const headers = {'Authorization': `bearer ${token}`}
     axios.post(baseUrl + 'password', { password }, { headers})

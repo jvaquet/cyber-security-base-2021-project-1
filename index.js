@@ -5,13 +5,17 @@ const jwt = require('jsonwebtoken')
 const db = require('./database')
 
 const JWT_SECRET = 'SECURE123'
+/*
+FIX FOR FLAW 7:
+const JWT_SECRET = process.env.JWT_SECRET
+*/
 
 db.initialize()
 const app = express()
 app.use(cors())
 
 app.use(express.json())
-app.use(express.static('build'))
+//app.use(express.static('build'))
 
 app.post('/api/messages', async (request, response) => {
   const authHeader = request.header('Authorization')
@@ -33,6 +37,7 @@ app.post('/api/messages', async (request, response) => {
       response.status(400).send()
     }
   } catch (e) {
+    console.log(e)
     response.status(401).send()
   }
 })
@@ -42,9 +47,10 @@ app.get('/api/messages/:user', async (request, response) => {
   const messages = await db.getMessagesForUser(user)
   response.json(messages)
 })
-
 /*
-This way a user can only access their own messages:
+FIX FOR FLAW 3:
+// This replaces the method above.
+// Accordingly remove the user url parameter from the request in the frontend
 
 app.get('/api/messages/', async (request, response) => {
   const authHeader = request.header('Authorization')
@@ -102,8 +108,9 @@ app.post('/api/likes', async (request, response) => {
   const likedUser = request.body.user
   try {
     const payload = jwt.verify(token, JWT_SECRET)
-    const user = payload.username
     /*
+    FIX FOR FLAW 4:
+    const user = payload.username
     if(user === likedUser) {
       response.status(403).send('You can not like yourself')
       return
@@ -159,7 +166,7 @@ app.get('/api/users', async (request, response) => {
   response.json(users)
 })
 
-const PORT = 3000
+const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
