@@ -15,7 +15,7 @@ const app = express()
 app.use(cors())
 
 app.use(express.json())
-//app.use(express.static('build'))
+app.use(express.static('build'))
 
 app.post('/api/messages', async (request, response) => {
   const authHeader = request.header('Authorization')
@@ -166,7 +166,7 @@ app.get('/api/users', async (request, response) => {
   response.json(users)
 })
 
-const PORT = 3001
+const PORT = 3000
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
